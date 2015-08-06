@@ -2,6 +2,32 @@ var express = require('express');
 var router = express.Router();
 var relateIqContact = require('../relate-facade-contact.js')
 var relateIqList = require('../relate-facade-list.js')
+var id = "55c2d241e4b0db5e30e4f703";
+var contactInfo = {
+  "id":id,
+  "properties":{
+    "name":[
+      {
+        "value":"abdullah"
+      }
+    ],
+    "email":[
+      {
+        "value":"zz@test.com"
+      }
+    ],
+    "phone":[
+      {
+        "value":"0277777777"
+      }
+    ],
+    "address":[
+      {
+        "value":"123 fake street"
+      }
+    ]
+  }
+};
 
 
 /* GET home page. */
@@ -17,31 +43,40 @@ router.get('/contact', function(req,res,next){
   relateIqContact.fetchContact('mmmcgrath5@hotmail.com')
 });
 
-router.get('/contact/new', function(req,res,next){
-  var contactInfo = {
-    "properties":{
-      "name":[
-        {
-          "value":"abdullah"
-        }
-      ],
-      "email":[
-        {
-          "value":"ab@test.com"
-        }
-      ],
-      "phone":[
-        {
-          "value":"0277777777"
-        }
-      ],
-      "address":[
-        {
-          "value":"123 fake street"
-        }
-      ]
-    }
-  };
+// router.get('/contacts/edit', function(req,res,next){
+//   var contactInfo = {
+//     "properties":{
+//       "name":[
+//         {
+//           "value":"abdullah"
+//         }
+//       ],
+//       "email":[
+//         {
+//           "value":"ce@jyes.com"
+//         }
+//       ],
+//       "phone":[
+//         {
+//           "value":"0277777777"
+//         }
+//       ],
+//       "address":[
+//         {
+//           "value":"123 fake street"
+//         }
+//       ]
+//     }
+//   };
+//   relateIqContact.upsertContact("ab@test.com",contactInfo);
+// });
+
+router.get('/contacts/update', function(req,res,next){
+  relateIqContact.updateContact(id, contactInfo);
+})
+
+router.get('/contacts/new', function(req,res,next){
+
   relateIqContact.createContact(contactInfo)
 });
 
@@ -50,12 +85,14 @@ router.get('/lists', function(req,res,next){
   relateIqList.fetchAllLists();
 });
 
-router.get('/lists/students', function(req,res,next){
+router.get('/lists/students/one', function(req,res,next){
   relateIqList.fetchList();
 })
 
-router.get('/lists/students/all', function(req,res,next){
+router.get('/lists/students', function(req,res,next){
   relateIqList.fetchListItems();
 })
+
+
 
 module.exports = router;

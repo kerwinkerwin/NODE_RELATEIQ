@@ -1,13 +1,14 @@
 var dotenv = require('dotenv')
 var unirest = require('unirest')
 var base_uri = "https://api.relateiq.com/v2/lists";
+dotenv.load()
 var auth = {
   user:process.env.APIKEY,
   pass:process.env.APISECRET,
   sendImmediately: true
 };
 var headers ={'Accept':'application/json', 'Content-Type':'application/json'};
-dotenv.load()
+
 
 var fetchList = function fetchList (){
   unirest.get(base_uri+ "/55a70228e4b01fe8e5a3d93b")
