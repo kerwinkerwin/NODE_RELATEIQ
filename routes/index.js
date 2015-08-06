@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var relateiq = require('../relate-facade.js')
+var relateIqContact = require('../relate-facade-contact.js')
+var relateIqList = require('../relate-facade-list.js')
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -8,11 +10,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/contacts', function(req,res,next){
-  relateiq.fetchContacts();
+  relateIqContact.fetchContacts();
 });
 
 router.get('/contact', function(req,res,next){
-  relateiq.fetchContact('mmmcgrath5@hotmail.com')
+  relateIqContact.fetchContact('mmmcgrath5@hotmail.com')
 });
 
 router.get('/contact/new', function(req,res,next){
@@ -40,7 +42,20 @@ router.get('/contact/new', function(req,res,next){
       ]
     }
   };
-  relateiq.createContact(contactInfo)
+  relateIqContact.createContact(contactInfo)
+});
+
+
+router.get('/lists', function(req,res,next){
+  relateIqList.fetchAllLists();
+});
+
+router.get('/lists/students', function(req,res,next){
+  relateIqList.fetchList();
+})
+
+router.get('/lists/students/all', function(req,res,next){
+  relateIqList.fetchListItems();
 })
 
 module.exports = router;
