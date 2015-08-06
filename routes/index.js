@@ -15,13 +15,31 @@ router.get('/contact', function(req,res,next){
   relateiq.fetchContact('mmmcgrath5@hotmail.com')
 });
 
-router.post('/contact', function(req,res,next){
+router.get('/contact/new', function(req,res,next){
   var contactInfo = {
-    name: "Facade",
-    email:"Facade@test.com",
-    phone:"0277777777",
-    address: "123 fake street"
-  }
+    "properties":{
+      "name":[
+        {
+          "value":"abdullah"
+        }
+      ],
+      "email":[
+        {
+          "value":"ab@test.com"
+        }
+      ],
+      "phone":[
+        {
+          "value":"0277777777"
+        }
+      ],
+      "address":[
+        {
+          "value":"123 fake street"
+        }
+      ]
+    }
+  };
   relateiq.createContact(contactInfo)
 })
 
