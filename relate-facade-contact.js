@@ -1,15 +1,4 @@
-var dotenv = require('dotenv')
-var unirest = require('unirest')
-var base_uri = "https://api.relateiq.com/v2/contacts";
-
-dotenv.load()
-var auth = {
-  user:process.env.APIKEY,
-  pass:process.env.APISECRET,
-  sendImmediately: true
-};
-var headers ={'Accept':'application/json', 'Content-Type':'application/json'};
-
+var relate = require('./relate.js');
 
 var fetchContact = function fetchContact(student){
   var contact_url = ""
@@ -26,13 +15,14 @@ var fetchContact = function fetchContact(student){
 };
 
 var fetchContacts = function fetchContacts(){
-  unirest.get(base_uri)
-    .auth(auth)
-    .header(headers)
-    .end(function(response){
-      console.log(response);
+    function somefunction(callback){
+        var contacts = relate.getContacts();
+        callback(contacts);
+    }
+    somefunction(function(contacts){
+      console.log(contacts);
     });
-}
+};
 
 var createContact = function createContact(contactProperties){
   var prop = JSON.stringify(contactProperties);
