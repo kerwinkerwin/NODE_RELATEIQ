@@ -9,14 +9,16 @@ var auth = {
 };
 var headers ={'Accept':'application/json', 'Content-Type':'application/json'};
 
-function _uniGet(uri,callback){
+function _uniGet(callback){
   unirest.get(base_uri)
     .auth(auth)
     .header(headers)
     .end(function(response){
-      callback(response);
+      callback(response.body);
     });
 }
+
+
 var getContacts = function getContacts (callback){
     return _uniGet(function(response){
       callback(response);
@@ -24,6 +26,11 @@ var getContacts = function getContacts (callback){
 
 };
 
+var getContact = function getContact(){
+
+};
+
 module.exports ={
-  getContacts: getContacts
+  getContacts: getContacts,
+  getContact: getContact
 };
