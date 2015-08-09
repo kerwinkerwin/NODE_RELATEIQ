@@ -16,7 +16,9 @@ var fetchContact = function fetchContact(student){
 };
 
 var fetchContacts = function fetchContacts(){
-  var contacts = relate.getContacts(console.log);
+  var contacts = relate.getContacts(function(info){
+    console.log(info);
+  });
 };
 
 var createContact = function createContact(contactProperties){
