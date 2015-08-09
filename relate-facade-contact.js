@@ -1,5 +1,6 @@
 var relate = require('./relate.js');
 
+
 var fetchContact = function fetchContact(student){
   var contact_url = ""
   if(student.indexOf("@") != -1){
@@ -15,13 +16,7 @@ var fetchContact = function fetchContact(student){
 };
 
 var fetchContacts = function fetchContacts(){
-    function somefunction(callback){
-        var contacts = relate.getContacts(console.log);
-        callback(contacts);
-    }
-    somefunction(function(contacts){
-      console.log(contacts);
-    });
+  var contacts = relate.getContacts(console.log);
 };
 
 var createContact = function createContact(contactProperties){

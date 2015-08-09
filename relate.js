@@ -9,7 +9,9 @@ var auth = {
 };
 var headers ={'Accept':'application/json', 'Content-Type':'application/json'};
 
-
+function _uniGet (){
+  
+}
 var getContacts = function getContacts (callback){
       unirest.get(base_uri)
         .auth(auth)
