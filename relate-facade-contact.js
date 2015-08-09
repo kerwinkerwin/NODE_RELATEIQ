@@ -16,7 +16,7 @@ var fetchContact = function fetchContact(student){
 
 var fetchContacts = function fetchContacts(){
     function somefunction(callback){
-        var contacts = relate.getContacts();
+        var contacts = relate.getContacts(console.log);
         callback(contacts);
     }
     somefunction(function(contacts){

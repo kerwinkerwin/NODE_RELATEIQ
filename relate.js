@@ -10,16 +10,14 @@ var auth = {
 var headers ={'Accept':'application/json', 'Content-Type':'application/json'};
 
 
-var getContacts = function getContacts (){
-
-    var contacts = function(){
+var getContacts = function getContacts (callback){
       unirest.get(base_uri)
         .auth(auth)
         .header(headers)
         .end(function(response){
+          callback(response);
         });
-    }
-    return contacts();
+};
 
 module.exports ={
   getContacts: getContacts
