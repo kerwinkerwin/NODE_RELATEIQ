@@ -14,14 +14,17 @@ var fetchContacts = function fetchContacts(){
 };
 
 var createContact = function createContact(contactProperties){
-  var prop = JSON.stringify(contactProperties);
-  unirest.post(base_uri)
-    .auth(auth)
-    .header(headers)
-    .send(contactProperties)
-    .end(function(response){
-      console.log(response);
-    });
+  // unirest.post(base_uri)
+  //   .auth(auth)
+  //   .header(headers)
+  //   .send(contactProperties)
+  //   .end(function(response){
+  //     console.log(response);
+  //   });
+  console.log(contactProperties);
+  var newContact = relate.createContact(contactProperties,function(info){
+    console.log(info.properties);
+  })
 };
 
 // var upsertContact = function upsertContact(contactEmail, contactInfo){

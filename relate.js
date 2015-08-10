@@ -13,14 +13,23 @@ var headers ={
   };
 
 function _uniGet(uri,callback){
-  console.log(uri)
   unirest.get(uri)
     .auth(auth)
     .header(headers)
     .end(function(response){
       callback(response.body);
     });
-}
+};
+
+function _uniPost(uri,info,callback){
+  unirest.post(uri)
+    .auth(auth)
+    .header(headers)
+    .send(info)
+    .end(function(response){
+      callback(response);
+    });
+};
 
 var getContacts = function getContacts (callback){
     _uniGet(base_uri,function(response){
@@ -34,12 +43,19 @@ var getContact = function getContact(identifier,callback){
     contact_url ="?properties.email="
   };
   url = base_uri + contact_url + identifier;
-  _uniGet(url,function(response){
+    _uniGet(url,function(response){
+      callback(response);
+    });
+};
+
+var createContact = function createContact(contact, callback){
+  _uniPost(base_uri,contact,function(response){
     callback(response);
   });
 };
 
 module.exports ={
   getContacts: getContacts,
-  getContact: getContact
+  getContact: getContact,
+  createContact: createContact
 };

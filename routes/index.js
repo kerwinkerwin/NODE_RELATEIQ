@@ -4,16 +4,15 @@ var relateIqContact = require('../relate-facade-contact.js')
 var relateIqList = require('../relate-facade-list.js')
 var id = "55c2d241e4b0db5e30e4f703";
 var contactInfo = {
-  "id":id,
   "properties":{
     "name":[
       {
-        "value":"abdullah"
+        "value":"jeuss"
       }
     ],
     "email":[
       {
-        "value":"zz@test.com"
+        "value":"ss@test.com"
       }
     ],
     "phone":[
@@ -76,7 +75,6 @@ router.get('/contacts/update', function(req,res,next){
 })
 
 router.get('/contacts/new', function(req,res,next){
-
   relateIqContact.createContact(contactInfo)
 });
 
