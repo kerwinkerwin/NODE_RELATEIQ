@@ -31,6 +31,16 @@ function _uniPost(uri,info,callback){
     });
 };
 
+function _uniPut(contactId, info, callback){
+  unirest.put(base_uri + "/" + contactId)
+  .auth(auth)
+  .header(headers)
+  .send(info)
+  .end(function(response){
+    callback(response);
+  })
+}
+
 var getContacts = function getContacts (callback){
     _uniGet(base_uri,function(response){
       callback(response);
@@ -54,8 +64,15 @@ var createContact = function createContact(contact, callback){
   });
 };
 
+var updateContact = function updateContact(contactId, contactInfo,callback){
+  _uniPut(contactId, contactInfo, function(response){
+    callback(response);
+  })
+}
+
 module.exports ={
   getContacts: getContacts,
   getContact: getContact,
-  createContact: createContact
+  createContact: createContact,
+  updateContact: updateContact
 };

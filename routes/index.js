@@ -4,6 +4,7 @@ var relateIqContact = require('../relate-facade-contact.js')
 var relateIqList = require('../relate-facade-list.js')
 var id = "55c2d241e4b0db5e30e4f703";
 var contactInfo = {
+  "id":id,
   "properties":{
     "name":[
       {
@@ -12,7 +13,7 @@ var contactInfo = {
     ],
     "email":[
       {
-        "value":"ss@test.com"
+        "value":"zz@test.com"
       }
     ],
     "phone":[
