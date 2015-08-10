@@ -19,9 +19,9 @@ var createContact = function createContact(contactProperties, callback){
   })
 };
 
-var updateContact = function updateContact(contactId, contactInfo){
+var updateContact = function updateContact(contactId, contactInfo, callback){
   var updateContact = relate.updateContact(contactId, contactInfo, function(info){
-    console.log(info);
+    callback(info);
   })
 
 
