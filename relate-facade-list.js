@@ -38,6 +38,10 @@ var fetchListItems = function fetchListItems (id,callback){
     });
 };
 
+var fetchCohortStudents = function fetchCohortStudents(cohort, callback){
+
+};
+
 module.exports = {
   fetchList:fetchList,
   fetchAllLists:fetchAllLists,

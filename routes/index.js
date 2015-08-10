@@ -2,9 +2,8 @@ var express = require('express');
 var router = express.Router();
 var relateIqContact = require('../relate-facade-contact.js')
 var relateIqList = require('../relate-facade-list.js')
-var id = "55c2d241e4b0db5e30e4f703";
 var contactInfo = {
-  "id":id,
+  "id":"55c2d241e4b0db5e30e4f703",
   "properties":{
     "name":[
       {
@@ -44,7 +43,7 @@ router.post('/contacts/new', function(req,res,next){
 
 /* PUT update contact */
 router.put('/contacts/:id/update', function(req,res,next){
-  id = req.params.id;
+  var id = req.params.id;
   console.log(id);
   relateIqContact.updateContact(id, contactInfo, function(response){
     res.send(JSON.stringify({response:response}));
@@ -58,7 +57,7 @@ router.get('/contacts', function(req,res,next){
 });
 /* GET return one contact */
 router.get('/contacts/:id', function(req,res,next){
-  id = req.params.id;
+  var id = req.params.id;
   relateIqContact.fetchContact(id, function(response){
     res.send(JSON.stringify({response:response}));
   });
@@ -73,18 +72,41 @@ router.get('/lists', function(req,res,next){
 
 /* GET return one list */
 router.get('/lists/:id', function(req,res,next){
-  id = req.params.id;
+  var id = req.params.id;
   relateIqList.fetchList(id, function(response){
     res.send(JSON.stringify({response:response}));
   });
-})
+});
 
 /* Get return all students for a list */
-router.get('/lists/:id/items', function(req,res,next){
-  id = req.params.id;
+router.get('/lists/:id/listitems', function(req,res,next){
+  var id = req.params.id;
   relateIqList.fetchListItems(id,function(response){
     res.send(JSON.stringify({response:response}));
   });
-})
+});
+
+router.get('/lists/:id/listitems/:cohort', function(req,res,next){
+  console.log("huh?");
+  var id = req.params.id;
+  var cohort = req.params.cohort;
+  console.log(cohort)
+  var cohortList = {
+    "0":"Kahu",
+    "1":"Ruru",
+    "2":"Weka"
+  }
+  relateIqList.fetchListItems(id,function(response){
+    response.objects.forEach(function(student){
+      if(student.fieldValues['30']!= undefined){
+        var cohortId = student.fieldValues['30'][0].raw
+        if(cohortList[cohortId]===cohort){
+          console.log(student.name)
+          console.log(cohortList[cohortId]);
+        };
+      }
+    });
+  });
+});
 
 module.exports = router;
