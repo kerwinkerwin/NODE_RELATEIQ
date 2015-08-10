@@ -87,26 +87,11 @@ router.get('/lists/:id/listitems', function(req,res,next){
 });
 
 router.get('/lists/:id/listitems/:cohort', function(req,res,next){
-  console.log("huh?");
   var id = req.params.id;
   var cohort = req.params.cohort;
-  console.log(cohort)
-  var cohortList = {
-    "0":"Kahu",
-    "1":"Ruru",
-    "2":"Weka"
-  }
-  relateIqList.fetchListItems(id,function(response){
-    response.objects.forEach(function(student){
-      if(student.fieldValues['30']!= undefined){
-        var cohortId = student.fieldValues['30'][0].raw
-        if(cohortList[cohortId]===cohort){
-          console.log(student.name)
-          console.log(cohortList[cohortId]);
-        };
-      }
-    });
-  });
+  relateIqList.fetchCohortStudents(id,cohort,function(response){
+    console.log(response);
+  })
 });
 
 module.exports = router;

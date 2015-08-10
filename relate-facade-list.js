@@ -38,12 +38,28 @@ var fetchListItems = function fetchListItems (id,callback){
     });
 };
 
-var fetchCohortStudents = function fetchCohortStudents(cohort, callback){
-
+var fetchCohortStudents = function fetchCohortStudents(id, cohort, callback){
+  var cohortList = {
+    "0":"Kahu",
+    "1":"Ruru",
+    "2":"Weka"
+  };
+  var students = [];
+  fetchListItems(id, function(response){
+    response.objects.forEach(function(student){
+      if(student.fieldValues['30']!= undefined){
+        var cohortId = student.fieldValues['30'][0].raw
+        if(cohortList[cohortId]===cohort){
+          callback({student:student.name, cohort:cohortList[cohortId]})
+        };
+      }
+    });
+  });
 };
 
 module.exports = {
   fetchList:fetchList,
   fetchAllLists:fetchAllLists,
-  fetchListItems: fetchListItems
+  fetchListItems: fetchListItems,
+  fetchCohortStudents: fetchCohortStudents
 };
