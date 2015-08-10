@@ -8,6 +8,7 @@ var auth = {
   sendImmediately: true
 };
 var headers ={'Accept':'application/json', 'Content-Type':'application/json'};
+var testid = "55a70228e4b01fe8e5a3d93b";
 
 
 var fetchList = function fetchList (){
@@ -19,21 +20,21 @@ var fetchList = function fetchList (){
     });
 };
 
-var fetchAllLists = function fetchAllLists(){
+var fetchAllLists = function fetchAllLists(callback){
   unirest.get(base_uri + "/?_start=0")
     .auth(auth)
     .header(headers)
     .end(function(response){
-      console.log(response.body);
+      callback(response.body)
     });
 };
 
-var fetchListItems = function fetchListItems (){
-  unirest.get(base_uri+ "/55a70228e4b01fe8e5a3d93b/listitems")
+var fetchListItems = function fetchListItems (id,callback){
+  unirest.get(base_uri+ "/"+id+"/listitems")
     .auth(auth)
     .header(headers)
     .end(function(response){
-      console.log(response.body);
+      callback(response.body);
     });
 };
 
