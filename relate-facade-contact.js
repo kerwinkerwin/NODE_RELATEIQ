@@ -7,9 +7,9 @@ var fetchContact = function fetchContact(student, callback){
   });
 };
 
-var fetchContacts = function fetchContacts(){
+var fetchContacts = function fetchContacts(callback){
   var contacts = relate.getContacts(function(info){
-    console.log(info);
+    callback(info);
   });
 };
 

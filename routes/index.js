@@ -41,7 +41,9 @@ router.post('/contacts/new', function(req,res,next){
 });
 
 router.get('/contacts', function(req,res,next){
-  relateIqContact.fetchContacts();
+  relateIqContact.fetchContacts(function(response){
+    res.send(JSON.stringify({response:response}));
+  });
 });
 
 router.get('/contacts/:id', function(req,res,next){
