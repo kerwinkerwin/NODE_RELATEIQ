@@ -90,7 +90,7 @@ router.get('/lists/:id/listitems/:cohort', function(req,res,next){
   var id = req.params.id;
   var cohort = req.params.cohort;
   relateIqList.fetchCohortStudents(id,cohort,function(response){
-    console.log(response);
+    res.send(JSON.stringify({response:response}))
   })
 });
 

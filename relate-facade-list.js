@@ -50,10 +50,11 @@ var fetchCohortStudents = function fetchCohortStudents(id, cohort, callback){
       if(student.fieldValues['30']!= undefined){
         var cohortId = student.fieldValues['30'][0].raw
         if(cohortList[cohortId]===cohort){
-          callback({student:student.name, cohort:cohortList[cohortId]})
+          students.push({student:student.name, cohort:cohortList[cohortId]})
         };
       }
     });
+    callback(students);
   });
 };
 
