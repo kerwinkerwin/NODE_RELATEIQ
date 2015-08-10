@@ -13,9 +13,9 @@ var fetchContacts = function fetchContacts(){
   });
 };
 
-var createContact = function createContact(contactProperties){
+var createContact = function createContact(contactProperties, callback){
   var newContact = relate.createContact(contactProperties,function(info){
-    console.log(info.properties);
+    callback(info);
   })
 };
 

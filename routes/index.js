@@ -34,50 +34,27 @@ var contactInfo = {
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
+router.post('/contacts/new', function(req,res,next){
+  relateIqContact.createContact(req.body, function(response){
+    res.send(JSON.stringify({response:response.code, status: response.status}))
+  });
+});
 
 router.get('/contacts', function(req,res,next){
   relateIqContact.fetchContacts();
 });
 
-router.get('/contact', function(req,res,next){
-  relateIqContact.fetchContact('expenses@loomio.org')
+router.post('/contacts/:id', function(req,res,next){
+  id = req.params.id
+  relateIqContact.fetchContact(id)
 });
 
-// router.get('/contacts/edit', function(req,res,next){
-//   var contactInfo = {
-//     "properties":{
-//       "name":[
-//         {
-//           "value":"abdullah"
-//         }
-//       ],
-//       "email":[
-//         {
-//           "value":"ce@jyes.com"
-//         }
-//       ],
-//       "phone":[
-//         {
-//           "value":"0277777777"
-//         }
-//       ],
-//       "address":[
-//         {
-//           "value":"123 fake street"
-//         }
-//       ]
-//     }
-//   };
-//   relateIqContact.upsertContact("ab@test.com",contactInfo);
-// });
-
-router.get('/contacts/update', function(req,res,next){
+router.put('/contacts/:id/update', function(req,res,next){
+  id = req.params.id
   relateIqContact.updateContact(id, contactInfo);
 })
 
-router.get('/contacts/new', function(req,res,next){
-  relateIqContact.createContact(contactInfo)
-});
+
 
 
 router.get('/lists', function(req,res,next){
