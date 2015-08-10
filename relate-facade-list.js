@@ -11,12 +11,12 @@ var headers ={'Accept':'application/json', 'Content-Type':'application/json'};
 var testid = "55a70228e4b01fe8e5a3d93b";
 
 
-var fetchList = function fetchList (){
-  unirest.get(base_uri+ "/55a70228e4b01fe8e5a3d93b")
+var fetchList = function fetchList (id,callback){
+  unirest.get(base_uri+ "/" + id)
     .auth(auth)
     .header(headers)
     .end(function(response){
-      console.log(response.body);
+      callback(response.body);
     });
 };
 

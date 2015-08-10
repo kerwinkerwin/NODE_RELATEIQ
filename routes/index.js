@@ -72,8 +72,11 @@ router.get('/lists', function(req,res,next){
 });
 
 /* GET return one list */
-router.get('/lists/students/one', function(req,res,next){
-  relateIqList.fetchList();
+router.get('/lists/:id', function(req,res,next){
+  id = req.params.id;
+  relateIqList.fetchList(id, function(response){
+    res.send(JSON.stringify({response:response}));
+  });
 })
 
 /* Get return all students for a list */
