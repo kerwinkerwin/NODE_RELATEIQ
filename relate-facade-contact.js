@@ -1,9 +1,9 @@
 var relate = require('./relate.js');
 
 
-var fetchContact = function fetchContact(student){
+var fetchContact = function fetchContact(student, callback){
   var contact = relate.getContact(student,function(info){
-    console.log(info);
+    callback(info);
   });
 };
 

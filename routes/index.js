@@ -36,7 +36,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/contacts/new', function(req,res,next){
   relateIqContact.createContact(req.body, function(response){
-    res.send(JSON.stringify({response:response.code, status: response.status}))
+    res.send(JSON.stringify({response:response.code, status: response.status}));
   });
 });
 
@@ -44,18 +44,17 @@ router.get('/contacts', function(req,res,next){
   relateIqContact.fetchContacts();
 });
 
-router.post('/contacts/:id', function(req,res,next){
+router.get('/contacts/:id', function(req,res,next){
   id = req.params.id
-  relateIqContact.fetchContact(id)
+  relateIqContact.fetchContact(id, function(response){
+    res.send(JSON.stringify({response:response}));
+  });
 });
 
 router.put('/contacts/:id/update', function(req,res,next){
   id = req.params.id
   relateIqContact.updateContact(id, contactInfo);
 })
-
-
-
 
 router.get('/lists', function(req,res,next){
   relateIqList.fetchAllLists();
@@ -68,7 +67,5 @@ router.get('/lists/students/one', function(req,res,next){
 router.get('/lists/students', function(req,res,next){
   relateIqList.fetchListItems();
 })
-
-
 
 module.exports = router;
