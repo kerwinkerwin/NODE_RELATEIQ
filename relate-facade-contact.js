@@ -2,17 +2,9 @@ var relate = require('./relate.js');
 
 
 var fetchContact = function fetchContact(student){
-  var contact_url = ""
-  if(student.indexOf("@") != -1){
-    contact_url ="?properties.email="
-  };
-
-  unirest.get(base_uri+ contact_url + student)
-    .auth(auth)
-    .header(headers)
-    .end(function(response){
-      console.log(response.body.objects[0])
-    });
+  var contact = relate.getContact(student,function(info){
+    console.log(info);
+  });
 };
 
 var fetchContacts = function fetchContacts(){

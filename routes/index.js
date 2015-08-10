@@ -40,7 +40,7 @@ router.get('/contacts', function(req,res,next){
 });
 
 router.get('/contact', function(req,res,next){
-  relateIqContact.fetchContact('mmmcgrath5@hotmail.com')
+  relateIqContact.fetchContact('expenses@loomio.org')
 });
 
 // router.get('/contacts/edit', function(req,res,next){
