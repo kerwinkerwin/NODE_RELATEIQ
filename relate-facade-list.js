@@ -39,10 +39,11 @@ var fetchListItems = function fetchListItems (id,callback){
 };
 
 var fetchCohortStudents = function fetchCohortStudents(id, cohort, callback){
+  var cohort = cohort.toLowerCase();
   var cohortList = {
-    "0":"Kahu",
-    "1":"Ruru",
-    "2":"Weka"
+    "0":"kahu",
+    "1":"ruru",
+    "2":"weka"
   };
   var students = [];
   fetchListItems(id, function(response){
