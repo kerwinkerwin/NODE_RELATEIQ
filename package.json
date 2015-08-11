@@ -17,5 +17,8 @@
     "request": "^2.60.0",
     "serve-favicon": "~2.3.0",
     "unirest": "^0.4.2"
+  },
+  "devDependencies": {
+    "webpack": "^1.11.0"
   }
 }
