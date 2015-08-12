@@ -58,7 +58,7 @@ describe('POST /contacts/new', function(){
        "properties":{
          "name":[
            {
-             "value":"mr tested"
+             "value":"Mr tested"
            }
          ],
          "email":[
@@ -89,9 +89,16 @@ describe('POST /contacts/new', function(){
       done();
     });
   });
+
   it("returns 200", function(done){
     expect(res.statusCode).to.equal(200);
     done();
   });
-  it("returns the ")
+
+  xit("creates correct contact", function(done){
+    var cont = contactToCreate.properties.name[0].value
+    var createdContactProps = res.body.properties.name[0].value
+    expect(cont).to.equal(createdContactProps);
+    done();
+  })
 })
