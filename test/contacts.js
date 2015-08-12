@@ -1,7 +1,7 @@
 var expect = require("chai").expect;
 var request = require("request");
 
-describe('/contacts', function(){
+xdescribe('GET /contacts', function(){
     var res;
     var parsedResponse;
     beforeEach(function(done){
@@ -22,7 +22,7 @@ describe('/contacts', function(){
       done();
     });
 
-        describe('Contact', function(done){
+        describe('Contacts', function(done){
           var res;
           var parsedResponse;
           var contact;
@@ -35,20 +35,63 @@ describe('/contacts', function(){
             done();
           });
         });
-        it("has all fields of contact", function(done){
+        it("has required fields", function(done){
           var props =["name","email","isgc"]
           expect(contact.properties).to.include.keys(props)
           done();
         });
 
-        it("contains i.d", function(done){
+        it("valid i.d", function(done){
           expect(contact.id).to.exist
           expect(contact.id.length).to.be.above(23)
           done();
         });
-        it("contains email", function(done){
+        it("valid email", function(done){
           expect(contact.properties.email[0].value).to.contain('@');
           done();
         })
       });
 });
+
+describe('POST /contacts/new', function(){
+  var contactToCreate ={
+       "properties":{
+         "name":[
+           {
+             "value":"mr tested"
+           }
+         ],
+         "email":[
+           {
+             "value":"zz@test.com"
+           }
+         ],
+         "phone":[
+           {
+             "value":"0277777777"
+           }
+         ],
+         "address":[
+           {
+             "value":"123 fake street"
+           }
+         ]
+       }
+  };
+  var res;
+  before(function(done){
+    request.post({
+      headers: {'Content-Type':'application/json'},
+      url:'http://localhost:3000/contacts/new',
+      body:JSON.stringify(contactToCreate)
+    },function(error,response,body){
+      res = JSON.parse(response.body);
+      done();
+    });
+  });
+  it("returns 200", function(done){
+    expect(res.statusCode).to.equal(200);
+    done();
+  });
+  it("returns the ")
+})

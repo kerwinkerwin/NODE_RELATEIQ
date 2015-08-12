@@ -36,8 +36,11 @@ router.get('/', function(req, res, next) {
 
 /* POST create contact */
 router.post('/contacts/new', function(req,res,next){
+  console.log(req.body)
   relateIqContact.createContact(req.body, function(response){
-    res.send(JSON.stringify({response:response.code, status: response.status}));
+    res.setHeader('Content-Type','application/json');
+    res.status(response.code);
+    res.send(JSON.stringify(response));
   });
 });
 
