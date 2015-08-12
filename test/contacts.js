@@ -1,7 +1,8 @@
 var expect = require("chai").expect;
 var request = require("request");
+var Faker = require('Faker');
 
-xdescribe('GET /contacts', function(){
+describe('GET /contacts', function(){
     var res;
     var parsedResponse;
     beforeEach(function(done){
@@ -36,7 +37,8 @@ xdescribe('GET /contacts', function(){
           });
         });
         it("has required fields", function(done){
-          var props =["name","email","isgc"]
+          var props =["name","email"]
+          console.log(contact);
           expect(contact.properties).to.include.keys(props)
           done();
         });
@@ -53,17 +55,20 @@ xdescribe('GET /contacts', function(){
       });
 });
 
-describe('POST /contacts/new', function(){
+xdescribe('POST /contacts/new', function(){
+  console.log(Faker);
+  var name = Faker.name.firstName();
+  var email = Faker.internet.email();
   var contactToCreate ={
        "properties":{
          "name":[
            {
-             "value":"Mr tested"
+             "value":name
            }
          ],
          "email":[
            {
-             "value":"zz@test.com"
+             "value":email
            }
          ],
          "phone":[
@@ -95,7 +100,8 @@ describe('POST /contacts/new', function(){
     done();
   });
 
-  xit("creates correct contact", function(done){
+  it("creates correct contact", function(done){
+    console.log(cont);
     var cont = contactToCreate.properties.name[0].value
     var createdContactProps = res.body.properties.name[0].value
     expect(cont).to.equal(createdContactProps);
