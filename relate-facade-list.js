@@ -45,17 +45,17 @@ var fetchCohortStudents = function fetchCohortStudents(id, cohort, callback){
     "1":"ruru",
     "2":"weka"
   };
-  var students = [];
+  var studentsObject = {cohort:cohort,students:[]};
   fetchListItems(id, function(response){
     response.objects.forEach(function(student){
       if(student.fieldValues['30']!= undefined){
         var cohortId = student.fieldValues['30'][0].raw
         if(cohortList[cohortId]===cohort){
-          students.push({student:student.name, cohort:cohortList[cohortId]})
+          studentsObject.students.push({student:student})
         };
       }
     });
-    callback(students);
+    callback(studentsObject);
   });
 };
 

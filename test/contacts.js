@@ -2,7 +2,7 @@ var expect = require("chai").expect;
 var request = require("request");
 var Faker = require('Faker');
 
-describe('GET /contacts', function(){
+xdescribe('GET /contacts', function(){
     var res;
     var parsedResponse;
     beforeEach(function(done){
@@ -111,15 +111,3 @@ xdescribe('PUT /contacts/:id:update', function(){
 
   })
 })
-
-xdescribe('GET /lists/:id/listitems/:cohort', function(){
-  var res;
-  var listID = "55a70228e4b01fe8e5a3d93b"
-  var cohort = "weka";
-  beforeEach(function(done){
-    request('/lists/'+listId+'/listitems/'+cohort, function(error,response,body){
-      res = JSON.parse(response);
-      console.log(res)
-    });
-  });
-});
