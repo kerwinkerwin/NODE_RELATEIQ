@@ -2,7 +2,7 @@ var expect = require("chai").expect;
 var request = require("request");
 var Faker = require('Faker');
 
-xdescribe('GET /contacts', function(){
+describe('GET /contacts', function(){
     var res;
     var parsedResponse;
     beforeEach(function(done){
@@ -38,6 +38,7 @@ xdescribe('GET /contacts', function(){
         });
         it("has required fields", function(done){
           var props =["name","email"]
+          console.log(contact.properties);
           expect(contact.properties).to.include.keys(props)
           done();
         });
@@ -54,7 +55,7 @@ xdescribe('GET /contacts', function(){
       });
 });
 
-xdescribe('POST /contacts/new', function(){
+describe('POST /contacts/new', function(){
   var name = Faker.name.firstName();
   var email = Faker.internet.email();
   var contactToCreate ={
