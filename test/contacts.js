@@ -118,9 +118,8 @@ xdescribe('GET /lists/:id/listitems/:cohort', function(){
   var cohort = "weka";
   beforeEach(function(done){
     request('/lists/'+listId+'/listitems/'+cohort, function(error,response,body){
-      res = response;
-
-
+      res = JSON.parse(response);
+      console.log(res)
     });
   });
 });
