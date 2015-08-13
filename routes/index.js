@@ -36,7 +36,6 @@ router.get('/', function(req, res, next) {
 
 /* POST create contact */
 router.post('/contacts/new', function(req,res,next){
-  console.log(req.body)
   relateIqContact.createContact(req.body, function(response){
     res.setHeader('Content-Type','application/json');
     res.status(response.code);
@@ -47,7 +46,6 @@ router.post('/contacts/new', function(req,res,next){
 /* PUT update contact */
 router.put('/contacts/:id/update', function(req,res,next){
   var id = req.params.id;
-  console.log(id);
   relateIqContact.updateContact(id, contactInfo, function(response){
     res.send(JSON.stringify({response:response}));
   });
@@ -55,21 +53,21 @@ router.put('/contacts/:id/update', function(req,res,next){
 /*GET return all contacts */
 router.get('/contacts', function(req,res,next){
   relateIqContact.fetchContacts(function(response){
-    res.send(JSON.stringify({response:response}));
+    res.status(200).json(response);
   });
 });
 /* GET return one contact */
 router.get('/contacts/:id', function(req,res,next){
   var id = req.params.id;
   relateIqContact.fetchContact(id, function(response){
-    res.send(JSON.stringify({response:response}));
+    res.status(200).json(response);
   });
 });
 
 /* GET return all lists */
 router.get('/lists', function(req,res,next){
   relateIqList.fetchAllLists(function(response){
-    res.send(JSON.stringify({response:response}));
+    res.status(200).json(response);
   });
 });
 
@@ -77,7 +75,7 @@ router.get('/lists', function(req,res,next){
 router.get('/lists/:id', function(req,res,next){
   var id = req.params.id;
   relateIqList.fetchList(id, function(response){
-    res.send(JSON.stringify({response:response}));
+    res.status(200).json(response);
   });
 });
 
@@ -85,7 +83,7 @@ router.get('/lists/:id', function(req,res,next){
 router.get('/lists/:id/listitems', function(req,res,next){
   var id = req.params.id;
   relateIqList.fetchListItems(id,function(response){
-    res.send(JSON.stringify({response:response}));
+    res.status(200).json(response);
   });
 });
 
@@ -93,7 +91,7 @@ router.get('/lists/:id/listitems/:cohort', function(req,res,next){
   var id = req.params.id;
   var cohort = req.params.cohort;
   relateIqList.fetchCohortStudents(id,cohort,function(response){
-    res.send(JSON.stringify({response:response}))
+    res.status(200).json(response);
   })
 });
 

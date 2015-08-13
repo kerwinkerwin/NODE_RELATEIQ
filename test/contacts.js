@@ -38,7 +38,6 @@ describe('GET /contacts', function(){
         });
         it("has required fields", function(done){
           var props =["name","email"]
-          console.log(contact);
           expect(contact.properties).to.include.keys(props)
           done();
         });
@@ -56,7 +55,6 @@ describe('GET /contacts', function(){
 });
 
 xdescribe('POST /contacts/new', function(){
-  console.log(Faker);
   var name = Faker.name.firstName();
   var email = Faker.internet.email();
   var contactToCreate ={
@@ -101,10 +99,26 @@ xdescribe('POST /contacts/new', function(){
   });
 
   it("creates correct contact", function(done){
-    console.log(cont);
     var cont = contactToCreate.properties.name[0].value
     var createdContactProps = res.body.properties.name[0].value
     expect(cont).to.equal(createdContactProps);
     done();
   })
 })
+
+xdescribe('PUT /contacts/:id:update', function(){
+  before(function(){
+
+  })
+})
+
+xdescribe('GET /lists/:id/listitems/:cohort', function(){
+  var res;
+  var listID = "55a70228e4b01fe8e5a3d93b"
+  var cohort = "weka";
+  beforeEach(function(done){
+    request('/lists/'+listId+'/listitems/:cohort', function(error,response,body){
+      res = response;
+    });
+  });
+});
