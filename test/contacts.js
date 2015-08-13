@@ -19,7 +19,7 @@ describe('GET /contacts', function(){
     });
 
     it("returns an array of contacts", function(done){
-      expect(parsedResponse.response.objects).to.have.length.above(0);
+      expect(parsedResponse.objects).to.have.length.above(0);
       done();
     });
 
@@ -32,7 +32,7 @@ describe('GET /contacts', function(){
           request("http://localhost:3000/contacts", function(error, response, body){
             res = response;
             parsedResponse = JSON.parse(res.body);
-            contact = parsedResponse.response.objects[0];
+            contact = parsedResponse.objects[0];
             done();
           });
         });
@@ -117,8 +117,10 @@ xdescribe('GET /lists/:id/listitems/:cohort', function(){
   var listID = "55a70228e4b01fe8e5a3d93b"
   var cohort = "weka";
   beforeEach(function(done){
-    request('/lists/'+listId+'/listitems/:cohort', function(error,response,body){
+    request('/lists/'+listId+'/listitems/'+cohort, function(error,response,body){
       res = response;
+
+
     });
   });
 });
