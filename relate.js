@@ -1,6 +1,7 @@
 var dotenv = require('dotenv')
 var unirest = require('unirest')
 var base_uri = "https://api.relateiq.com/v2/contacts";
+var listUri = "https://api.relateiq.com/v2/lists"
 dotenv.load()
 var auth = {
     user:process.env.APIKEY,
@@ -71,9 +72,15 @@ var updateContact = function updateContact(contactId, contactInfo,callback){
   })
 }
 
+var getLists = function getLists(callback){
+  _uniGet(listUri + "/?_start=0",function(response){
+    callback(response);
+  })
+}
 module.exports ={
   getContacts: getContacts,
   getContact: getContact,
   createContact: createContact,
-  updateContact: updateContact
+  updateContact: updateContact,
+  getLists: getLists
 };
