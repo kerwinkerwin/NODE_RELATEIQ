@@ -66,7 +66,6 @@ var createContact = function createContact(contact, callback){
 
 var updateContact = function updateContact(contactId, contactInfo,callback){
   _uniPut(contactId,contactInfo,function(response){
-    console.log(response);
     callback(response);
   })
 }
