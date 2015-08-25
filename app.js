@@ -7,7 +7,7 @@ var relateCredentials = {
   sendImmediately: true
 }
 var bodyParser = require('body-parser')
-var relateIqContact = require('./relate-facade.js')(relateCredentials)
+var relate = require('@eda/relate-facade')(relateCredentials)
 app.use(bodyParser.json())
 
 var server = app.listen(3001, function () {
@@ -23,7 +23,7 @@ app.get('/', function(req, res, next) {
 /* POST create contact */
 app.post('/contacts/new', function(req,res,next){
   console.log(req)
-  relateIqContact.createContact(req.body, function(response){
+  relate.createContact(req.body, function(response){
     res.setHeader('Content-Type','application/json');
     res.status(response.code);
     res.send(JSON.stringify(response));
@@ -33,27 +33,27 @@ app.post('/contacts/new', function(req,res,next){
 /* PUT update contact */
 app.put('/contacts/:id/update', function(req,res,next){
   var id = req.params.id;
-  relateIqContact.updateContact(id, contactInfo, function(response){
+  relate.updateContact(id, contactInfo, function(response){
     res.send(JSON.stringify({response:response}));
   });
 })
 /*GET return all contacts */
 app.get('/contacts', function(req,res,next){
-  relateIqContact.getContacts(function(response){
+  relate.getContacts(function(response){
     res.status(200).json(response);
   });
 });
 /* GET return one contact */
 app.get('/contacts/:id', function(req,res,next){
   var id = req.params.id;
-  relateIqContact.getContact(id, function(response){
+  relate.getContact(id, function(response){
     res.status(200).json(response);
   });
 });
 
 /* GET return all lists */
 app.get('/lists', function(req,res,next){
-  relateIqContact.getLists(function(response){
+  relate.getLists(function(response){
     res.status(200).json(response);
   });
 });
@@ -61,7 +61,7 @@ app.get('/lists', function(req,res,next){
 /* GET return one list */
 app.get('/lists/:id', function(req,res,next){
   var id = req.params.id;
-  relateIqContact.getList(id, function(response){
+  relate.getList(id, function(response){
     res.status(200).json(response);
   });
 });
@@ -69,7 +69,7 @@ app.get('/lists/:id', function(req,res,next){
 /* Get return all students for a list */
 app.get('/lists/:id/listitems', function(req,res,next){
   var id = req.params.id;
-  relateIqContact.getListItems(id,function(response){
+  relate.getListItems(id,function(response){
     res.status(200).json(response);
   });
 });
@@ -77,7 +77,7 @@ app.get('/lists/:id/listitems', function(req,res,next){
 /* return all students from a cohort */
 app.get('/students/:cohort', function(req,res,next){
   var cohort = req.params.cohort;
-  relateIqContact.getCohortStudents(cohort,function(response){
+  relate.getCohortStudents(cohort,function(response){
     res.status(200).json(response);
   })
 });
