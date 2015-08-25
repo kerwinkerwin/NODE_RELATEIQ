@@ -71,16 +71,28 @@ var updateContact = function updateContact(contactId, contactInfo,callback){
     callback(response);
   })
 }
+var getList = function getList(id,callback){
+  console.log(id)
+  console.log("hi");
+  _uniGet(listUri + "/" + id, function(response){
+    callback(response);
+  })
+};
 
 var getLists = function getLists(callback){
   _uniGet(listUri + "/?_start=0",function(response){
+    console.log(response);
     callback(response);
   })
 }
+
+
+
 module.exports ={
   getContacts: getContacts,
   getContact: getContact,
   createContact: createContact,
   updateContact: updateContact,
-  getLists: getLists
+  getLists: getLists,
+  getList: getList
 };

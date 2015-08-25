@@ -47,7 +47,7 @@ app.get('/contacts/:id', function(req,res,next){
 
 /* GET return all lists */
 app.get('/lists', function(req,res,next){
-  relateIqList.fetchAllLists(function(response){
+  relateIqContact.getLists(function(response){
     res.status(200).json(response);
   });
 });
@@ -55,7 +55,7 @@ app.get('/lists', function(req,res,next){
 /* GET return one list */
 app.get('/lists/:id', function(req,res,next){
   var id = req.params.id;
-  relateIqList.fetchList(id, function(response){
+  relateIqContact.getList(id, function(response){
     res.status(200).json(response);
   });
 });
