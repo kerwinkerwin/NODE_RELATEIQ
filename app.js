@@ -1,29 +1,82 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var app = require('express')();
+var bodyParser = require('body-parser')
+var relateIqContact = require('./relate.js')
+var relateIqList = require('./relate-facade-list.js')
+app.use(bodyParser.json())
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var server = app.listen(3001, function () {
+var port = server.address().port
+  console.log('Server started on port: ' + port)
+})
 
-var app = express();
+/* GET home page. */
+app.get('/', function(req, res, next) {
+  res.send('MMMKAY');
+});
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+/* POST create contact */
+app.post('/contacts/new', function(req,res,next){
+  console.log(req)
+  relateIqContact.createContact(req.body, function(response){
+    res.setHeader('Content-Type','application/json');
+    res.status(response.code);
+    res.send(JSON.stringify(response));
+  });
+});
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+/* PUT update contact */
+app.put('/contacts/:id/update', function(req,res,next){
+  var id = req.params.id;
+  relateIqContact.updateContact(id, contactInfo, function(response){
+    res.send(JSON.stringify({response:response}));
+  });
+})
+/*GET return all contacts */
+app.get('/contacts', function(req,res,next){
+  relateIqContact.getContacts(function(response){
+    res.status(200).json(response);
+  });
+});
+/* GET return one contact */
+app.get('/contacts/:id', function(req,res,next){
+  var id = req.params.id;
+  relateIqContact.getContact(id, function(response){
+    res.status(200).json(response);
+  });
+});
 
-app.use('/', routes);
-app.use('/users', users);
+/* GET return all lists */
+app.get('/lists', function(req,res,next){
+  relateIqList.fetchAllLists(function(response){
+    res.status(200).json(response);
+  });
+});
+
+/* GET return one list */
+app.get('/lists/:id', function(req,res,next){
+  var id = req.params.id;
+  relateIqList.fetchList(id, function(response){
+    res.status(200).json(response);
+  });
+});
+
+/* Get return all students for a list */
+app.get('/lists/:id/listitems', function(req,res,next){
+  var id = req.params.id;
+  relateIqList.fetchListItems(id,function(response){
+    res.status(200).json(response);
+  });
+});
+
+app.get('/lists/:id/listitems/:cohort', function(req,res,next){
+  var id = req.params.id;
+  var cohort = req.params.cohort;
+  relateIqList.fetchCohortStudents(id,cohort,function(response){
+    res.status(200).json(response);
+  })
+});
+
+
 
 
 // catch 404 and forward to error handler

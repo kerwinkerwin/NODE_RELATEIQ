@@ -60,6 +60,7 @@ var getContact = function getContact(identifier,callback){
 
 var createContact = function createContact(contact, callback){
   _uniPost(base_uri,contact,function(response){
+    console.log(contact);
     callback(response);
   });
 };
