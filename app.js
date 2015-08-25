@@ -1,6 +1,13 @@
 var app = require('express')();
+var dotenv = require('dotenv')
+dotenv.load()
+var relateCredentials = {
+  user:process.env.APIKEY,
+  pass:process.env.APISECRET,
+  sendImmediately: true
+}
 var bodyParser = require('body-parser')
-var relateIqContact = require('./relate-facade.js')
+var relateIqContact = require('./relate-facade.js')(relateCredentials)
 app.use(bodyParser.json())
 
 var server = app.listen(3001, function () {

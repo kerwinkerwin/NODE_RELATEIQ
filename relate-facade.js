@@ -1,17 +1,31 @@
-var dotenv = require('dotenv')
 var unirest = require('unirest')
 var base_uri = "https://api.relateiq.com/v2/contacts";
 var listUri = "https://api.relateiq.com/v2/lists"
-dotenv.load()
-var auth = {
-    user:process.env.APIKEY,
-    pass:process.env.APISECRET,
-    sendImmediately: true
-  };
 var headers ={
-    'Accept':'application/json',
-    'Content-Type':'application/json'
+      'Accept':'application/json',
+      'Content-Type':'application/json'
+    };
+var user;
+var pass;
+var auth;
+
+
+var initialize = function initialize(relateCredentials){
+  auth = {
+    user: relateCredentials.user,
+    pass: relateCredentials.pass,
+    sendImmediately:true
   };
+  return {
+    getContacts: getContacts,
+    getContact: getContact,
+    createContact: createContact,
+    updateContact: updateContact,
+    getLists: getLists,
+    getList: getList,
+    getCohortStudents: getCohortStudents
+  }
+}
 
 function _uniGet(uri,callback){
   unirest.get(uri)
@@ -111,12 +125,4 @@ var getCohortStudents = function getCohortStudents(cohort,callback){
   });
 }
 
-module.exports ={
-  getContacts: getContacts,
-  getContact: getContact,
-  createContact: createContact,
-  updateContact: updateContact,
-  getLists: getLists,
-  getList: getList,
-  getCohortStudents: getCohortStudents
-};
+module.exports = initialize;
