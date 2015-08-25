@@ -1,7 +1,6 @@
 var app = require('express')();
 var bodyParser = require('body-parser')
-var relateIqContact = require('./relate.js')
-var relateIqList = require('./relate-facade-list.js')
+var relateIqContact = require('./relate-facade.js')
 app.use(bodyParser.json())
 
 var server = app.listen(3001, function () {
