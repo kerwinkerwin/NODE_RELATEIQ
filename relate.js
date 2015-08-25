@@ -72,8 +72,6 @@ var updateContact = function updateContact(contactId, contactInfo,callback){
   })
 }
 var getList = function getList(id,callback){
-  console.log(id)
-  console.log("hi");
   _uniGet(listUri + "/" + id, function(response){
     callback(response);
   })
@@ -81,12 +79,37 @@ var getList = function getList(id,callback){
 
 var getLists = function getLists(callback){
   _uniGet(listUri + "/?_start=0",function(response){
-    console.log(response);
     callback(response);
   })
 }
 
+var getListItems = function getListItems(id, callback){
+    _uniGet(listUri+"/"+id+"/listitems", function(response){
+      callback(response);
+    })
+}
 
+var getCohortStudents = function getCohortStudents(cohort,callback){
+  var cohort = cohort.toLowerCase();
+  var cohortRelateId = "55a70228e4b01fe8e5a3d93b";
+  var cohortList = {
+    "0":"kahu",
+    "1":"ruru",
+    "2":"weka"
+  };
+  var studentsObject = {cohort:cohort,students:[]};
+  getListItems(cohortRelateId, function(response){
+    response.objects.forEach(function(student){
+      if(student.fieldValues['30']!= undefined){
+        var cohortId = student.fieldValues['30'][0].raw
+        if(cohortList[cohortId]===cohort){
+          studentsObject.students.push({student:student})
+        };
+      }
+    });
+    callback(studentsObject);
+  });
+}
 
 module.exports ={
   getContacts: getContacts,
@@ -94,5 +117,6 @@ module.exports ={
   createContact: createContact,
   updateContact: updateContact,
   getLists: getLists,
-  getList: getList
+  getList: getList,
+  getCohortStudents: getCohortStudents
 };

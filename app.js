@@ -63,21 +63,18 @@ app.get('/lists/:id', function(req,res,next){
 /* Get return all students for a list */
 app.get('/lists/:id/listitems', function(req,res,next){
   var id = req.params.id;
-  relateIqList.fetchListItems(id,function(response){
+  relateIqContact.getListItems(id,function(response){
     res.status(200).json(response);
   });
 });
 
-app.get('/lists/:id/listitems/:cohort', function(req,res,next){
-  var id = req.params.id;
+/* return all students from a cohort */
+app.get('/students/:cohort', function(req,res,next){
   var cohort = req.params.cohort;
-  relateIqList.fetchCohortStudents(id,cohort,function(response){
+  relateIqContact.getCohortStudents(cohort,function(response){
     res.status(200).json(response);
   })
 });
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
